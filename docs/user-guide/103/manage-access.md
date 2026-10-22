@@ -33,6 +33,10 @@ To share a workspace with others:
 
 Invited users will see the workspace listed under their **Investigations** tab.
 
+## Datasets
+
+Access to datasets is managed by admins only. If you have write access to a dataset, you can upload documents to it (for example with **Upload to a dataset** on the homepage), but the **Share** option is not shown to you. Ask an admin to change who can view or upload to a dataset.
+
 ## Managing Existing Permissions
 
 You can update or remove collaborators at any time by following the same steps listed above. Simply deselect the assigned roles and click **Save changes**.

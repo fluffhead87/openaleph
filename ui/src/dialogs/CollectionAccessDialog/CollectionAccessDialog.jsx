@@ -22,9 +22,9 @@ import { showSuccessToast, showWarningToast } from 'app/toast';
 import './CollectionAccessDialog.scss';
 
 // external collections are never writeable, but users holding write access can
-// still manage their permissions ("shareable")
-const canManagePermissions = (collection) =>
-  !!collection && (collection.writeable || collection.shareable);
+// still manage their permissions ("shareable"). Access to datasets is managed
+// by admins only, so writers of a dataset are not "shareable".
+const canManagePermissions = (collection) => !!collection?.shareable;
 
 const messages = defineMessages({
   title: {

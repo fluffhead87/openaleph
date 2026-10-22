@@ -187,7 +187,10 @@ class CollectionSerializer(Serializer):
         }
         obj["shallow"] = obj.get("shallow", True)
         obj["writeable"] = not obj.get("external") and can_write
-        obj["shareable"] = can_write
+        # access to datasets is managed by admins only, see permissions_api
+        obj["shareable"] = can_write and (
+            bool(obj.get("casefile")) or request.authz.is_admin
+        )
         creator_id = obj.pop("creator_id", None)
         obj["creator"] = self.resolve(Role, creator_id, RoleSerializer)
         obj["team"] = []
