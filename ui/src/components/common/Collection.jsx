@@ -171,7 +171,7 @@ class CollectionSelect extends Component {
   }
 
   render() {
-    const { buttonProps, collection, result } = this.props;
+    const { buttonProps, collection, result, icon = 'briefcase' } = this.props;
     const label = collection ? (
       <CollectionLabel collection={collection} icon={false} />
     ) : (
@@ -194,7 +194,7 @@ class CollectionSelect extends Component {
         resetOnClose
         resetOnSelect
       >
-        <Button fill text={label} icon="briefcase" alignText="left" />
+        <Button fill text={label} icon={icon} alignText="left" />
       </SelectWrapper>
     );
   }

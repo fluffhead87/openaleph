@@ -100,12 +100,14 @@ class CollectionManageMenu extends React.Component {
                 text={intl.formatMessage(messages.edit)}
                 icon="cog"
               />
-              <MenuItem
-                key={'access'}
-                onClick={() => this.toggleDialog('isAccessOpen')}
-                text={intl.formatMessage(messages.access)}
-                icon="key"
-              />
+              {collection.shareable && (
+                <MenuItem
+                  key={'access'}
+                  onClick={() => this.toggleDialog('isAccessOpen')}
+                  text={intl.formatMessage(messages.access)}
+                  icon="key"
+                />
+              )}
               <MenuItem
                 key={'reingest'}
                 onClick={() => this.toggleDialog('isReingestOpen')}

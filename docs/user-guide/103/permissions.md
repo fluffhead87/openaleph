@@ -19,8 +19,10 @@ All of the above, plus:
 - Edit collection metadata and descriptions
 - Modify entity information and mappings
 - Create and edit network diagrams
-- Add other users to the collection and change their permission levels
+- Add other users to an investigation and change their permission levels
 - Delete collections
+
+Write access to a dataset lets you upload documents to it, but not change who can access it. Access to datasets is managed by admins only.
 
 ### Admin Access
 
@@ -30,6 +32,7 @@ System administrators automatically have full access to all collections, regardl
 - Manage system-wide settings
 - Override collection-level access controls
 - Convert Investigations to Datasets and vice versa
+- Manage who can access datasets
 - Share collections with special user groups, such 'all logged in users'
 
 ## How Permissions Are Applied

@@ -115,6 +115,19 @@ export function datasetsQuery(location) {
   return query.defaultSortBy('created_at', 'desc');
 }
 
+// Datasets (not investigations) the current user can upload documents to.
+// External datasets are never writeable, see CollectionSerializer.
+export function writeableDatasetsQuery() {
+  const context = {
+    'filter:writeable': true,
+    'exclude:category': 'casefile',
+    'exclude:external': true,
+  };
+  return new Query('collections', {}, context, 'collections')
+    .sortBy('label', 'asc')
+    .limit(Query.LARGE);
+}
+
 export function collectionEntitySetsQuery(location, collectionId) {
   const context = { 'filter:collection_id': collectionId };
   const path = collectionId ? `entitysets` : undefined;

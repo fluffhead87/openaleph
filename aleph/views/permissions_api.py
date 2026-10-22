@@ -9,9 +9,18 @@ from aleph.logic.permissions import update_permission
 from aleph.logic.roles import check_visible
 from aleph.model import Permission, Role
 from aleph.views.serializers import PermissionSerializer
-from aleph.views.util import get_db_collection, jsonify, parse_request
+from aleph.views.util import get_db_collection, jsonify, parse_request, require
 
 blueprint = Blueprint("permissions_api", __name__)
+
+
+def _get_collection(collection_id):
+    collection = get_db_collection(collection_id, request.authz.WRITE)
+    # Write access is enough to manage who can access an investigation, but
+    # access to datasets (source evidence) is managed by admins only.
+    if not collection.casefile:
+        require(request.authz.is_admin)
+    return collection
 
 
 @blueprint.route("/<int:collection_id>/permissions")
@@ -47,7 +56,7 @@ def index(collection_id):
       - Permission
       - Collection
     """
-    collection = get_db_collection(collection_id, request.authz.WRITE)
+    collection = _get_collection(collection_id)
     roles = Role.all_groups(request.authz).all()
     if request.authz.is_admin:
         roles.extend(Role.all_system())
@@ -117,7 +126,7 @@ def update(collection_id):
       - Permission
       - Collection
     """
-    collection = get_db_collection(collection_id, request.authz.WRITE)
+    collection = _get_collection(collection_id)
     for permission in parse_request("PermissionUpdateList"):
         if permission.get("email"):
             role = Role.by_email(permission.get("email").strip())
